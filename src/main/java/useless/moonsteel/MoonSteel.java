@@ -2,6 +2,7 @@ package useless.moonsteel;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomLootObject;
@@ -20,6 +21,7 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.crafting.LookupFuelFurnaceBlast;
 import net.minecraft.core.data.tag.Tag;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
@@ -33,6 +35,7 @@ import net.minecraft.core.item.tool.ItemToolShovel;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.sound.SoundType;
 import net.minecraft.core.world.World;
+import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tosutosu.betterwithbackpacks.ModItems;
@@ -318,5 +321,14 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		if (world.isDaytime()) return false;
 		if (world.getWorldTime() % 2000 > 200) return false;
 		return true;
+	}
+	public static void teleport(double x, double y, double z, EntityPlayer player){
+		if (player instanceof EntityPlayerMP){
+			EntityPlayerMP playerMP = (EntityPlayerMP)player;
+			playerMP.playerNetServerHandler.teleport(x, y, z);
+		} else if (player instanceof EntityPlayerSP) {
+			EntityPlayerSP playerSP = (EntityPlayerSP)player;
+			playerSP.setPos(x, y + playerSP.bbHeight, z);
+		}
 	}
 }

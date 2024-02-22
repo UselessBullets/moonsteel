@@ -1,5 +1,6 @@
 package useless.moonsteel.item;
 
+import net.minecraft.core.Global;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -27,9 +28,9 @@ public class ItemConnectedStar extends Item {
 			TileEntity te = chunk.getTileEntity(destX &0xF, destY, destZ &0xF);
 			if (te instanceof TileEntityStellarRewinder && ((TileEntityStellarRewinder) te).canTeleport(itemstack)){
 				Side side = ((TileEntityStellarRewinder) te).side;
-				entityplayer.setPos(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY() + 2, destZ + side.getOffsetZ() + 0.5f);
+				MoonSteel.teleport(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY(), destZ + side.getOffsetZ() + 0.5f, entityplayer);
 				((TileEntityStellarRewinder) te).setInUse(false);
-			} else {
+			} else if (!world.isClientSide) {
 				entityplayer.addChatMessage("moonsteel.teleport.fail");
 			}
 			itemstack.getData().putBoolean("moonsteel$has_location", false);
