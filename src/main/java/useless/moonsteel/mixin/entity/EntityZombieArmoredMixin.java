@@ -26,23 +26,23 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 	@Shadow
 	@Final
 	private boolean isHoldingSword;
-	@Unique
-	public boolean isStarZombie = false;
+	public EntityZombieArmoredMixin(World world) {
+		super(world);
+	}
+	@Override
+	public void init(){
+		entityData.define(20, (byte)0);
+	}
 	@Override
 	public void spawnInit(){
 		super.spawnInit();
 		if (MoonSteel.isStarTime(this.world)){
-			isStarZombie = true;
+			entityData.set(20, (byte)1);
 		}
 	}
-
-	public EntityZombieArmoredMixin(World world) {
-		super(world);
-	}
-
 	@Override
 	public double moonsteel$getGravScalar() {
-		if (isStarZombie){
+		if (moonsteel$isStarZombie()){
 			double scalar = 1d;
 			for (int i = 0; i < 4; ++i) {
 				if (this.health > this.armorBreakPoints[i]) scalar -= 0.125d;
@@ -54,18 +54,18 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 
 	@Override
 	public boolean moonsteel$isStarZombie() {
-		return isStarZombie;
+		return entityData.getByte(20) == 1;
 	}
 	@Inject(method = "getHeldItem()Lnet/minecraft/core/item/ItemStack;", at = @At("HEAD"), cancellable = true)
 	private void sword(CallbackInfoReturnable<ItemStack> cir){
-		if (isHoldingSword && isStarZombie){
+		if (isHoldingSword && moonsteel$isStarZombie()){
 			cir.setReturnValue(MoonSteel.starZombieSword);
 		}
 	}
 
 	@Redirect(method = "hurt(Lnet/minecraft/core/entity/Entity;ILnet/minecraft/core/util/helper/DamageType;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/monster/EntityArmoredZombie;spawnAtLocation(Lnet/minecraft/core/item/ItemStack;F)Lnet/minecraft/core/entity/EntityItem;"))
 	private EntityItem spawnRedirect(EntityArmoredZombie instance, ItemStack stack, float v){
-		if (isStarZombie){
+		if (moonsteel$isStarZombie()){
 			return spawnAtLocation(MoonSteel.fallenStar.getDefaultStack(), v);
 		}
 		return spawnAtLocation(stack, v);
@@ -73,12 +73,12 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putBoolean("moonsteel$starzombie", isStarZombie);
+		tag.putByte("moonsteel$starzombie", moonsteel$isStarZombie() ? (byte) 1 : (byte)0);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		this.isStarZombie = tag.getBoolean("moonsteel$starzombie");
+		entityData.set(20, (byte)tag.getByte("moonsteel$starzombie"));
 	}
 }
