@@ -1,13 +1,17 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "useless.moonsteel.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-    ],
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "useless.moonsteel.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BlockMixin",
+    "EntityLivingMixin",
+    "ItemToolSwordAccessor",
+    "WorldMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
