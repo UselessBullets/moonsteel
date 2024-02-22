@@ -31,7 +31,6 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 	@Override
 	public void spawnInit(){
 		super.spawnInit();
-		isStarZombie = true;
 		if (MoonSteel.isStarTime(this.world)){
 			isStarZombie = true;
 		}
