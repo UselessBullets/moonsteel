@@ -1,5 +1,6 @@
 package useless.moonsteel;
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
@@ -31,5 +32,18 @@ public class TileEntityStellarRewinder extends TileEntity {
 	public void setInUse(boolean flag){
 		inUse = flag;
 		worldObj.notifyBlockChange(x, y, z, worldObj.getBlockId(x, y, z));
+	}
+	public void readFromNBT(CompoundTag tag) {
+		super.readFromNBT(tag);
+		this.inUse = tag.getBoolean("inuse");
+		this.checkCode = tag.getLong("checkcode");
+		this.side = Side.getSideById(tag.getInteger("side"));
+	}
+
+	public void writeToNBT(CompoundTag tag) {
+		super.writeToNBT(tag);
+		tag.putBoolean("inuse", inUse);
+		tag.putLong("checkcode", checkCode);
+		tag.putInt("side", side.getId());
 	}
 }

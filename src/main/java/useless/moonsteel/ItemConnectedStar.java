@@ -6,6 +6,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.Chunk;
 import turniplabs.halplibe.helper.TextureHelper;
 
 public class ItemConnectedStar extends Item {
@@ -18,7 +19,10 @@ public class ItemConnectedStar extends Item {
 			int destX = itemstack.getData().getInteger("moonsteel$x");
 			int destY = itemstack.getData().getInteger("moonsteel$y");
 			int destZ = itemstack.getData().getInteger("moonsteel$z");
-			TileEntity te = world.getBlockTileEntity(destX, destY, destZ);
+			MoonSteel.forceChunkLoads = true;
+			Chunk chunk = world.getChunkProvider().provideChunk(destX >> 4, destZ >> 4);
+			MoonSteel.forceChunkLoads = false;
+			TileEntity te = chunk.getTileEntity(destX &0xF, destY, destZ &0xF);
 			if (te instanceof TileEntityStellarRewinder && ((TileEntityStellarRewinder) te).canTeleport(itemstack)){
 				Side side = ((TileEntityStellarRewinder) te).side;
 				entityplayer.setPos(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY() + 2, destZ + side.getOffsetZ() + 0.5f);

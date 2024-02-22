@@ -43,6 +43,7 @@ import tosutosu.betterwithbackpacks.ModItems;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.BlockBuilder;
+import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 import turniplabs.halplibe.helper.ModVersionHelper;
 import turniplabs.halplibe.helper.RecipeBuilder;
@@ -133,6 +134,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		TextureHelper.getOrCreateItemTexture(MOD_ID, "particle_magicsmoke.png");
 	}
 	public static ItemStack starZombieSword = toolSwordMoonSteel.getDefaultStack();
+	public static boolean forceChunkLoads = false;
     @Override
     public void onInitialize() {
         LOGGER.info("MoonSteel initialized.");
@@ -140,7 +142,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 
 	@Override
 	public void beforeGameStart() {
-
+		EntityHelper.Core.createTileEntity(TileEntityStellarRewinder.class, "moonsteel$stellar_rewinder");
 	}
 
 	@Override
