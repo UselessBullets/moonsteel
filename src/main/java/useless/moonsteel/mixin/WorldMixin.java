@@ -58,7 +58,7 @@ public abstract class WorldMixin {
 	private void makeTheStarsFall(CallbackInfo ci, Iterator var1, ChunkCoordinate coordinate, int chunkBlockX, int chunkBlockZ){
 		if (!MoonSteel.isStarTime((World) (Object)this)) return;
 		Chunk chunk = this.getChunkFromChunkCoords(coordinate.x, coordinate.z);
-		if (rand.nextInt(1500) == 0){
+		if (rand.nextInt(2500) == 0){
 			this.updateLCG = this.updateLCG * 3 + 1013904223;
 			int randVal = this.updateLCG >> 2;
 			int blockX = chunk.xPosition * 16 + (randVal & 0xF);
