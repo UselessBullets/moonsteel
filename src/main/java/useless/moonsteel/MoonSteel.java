@@ -55,6 +55,7 @@ import useless.moonsteel.block.BlockStellarRewinder;
 import useless.moonsteel.block.BlockTorchStar;
 import useless.moonsteel.block.TileEntityStellarRewinder;
 import useless.moonsteel.item.ItemConnectedStar;
+import useless.moonsteel.item.ItemStarBackpack;
 
 
 public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint, ClientStartEntrypoint {
@@ -64,6 +65,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static int blockId = 2000;
 	public static int itemId = 17000;
+	public static int GUI_ID = 20;
 	public static boolean backpackPresent = ModVersionHelper.isModPresent("betterwithbackpacks");
 	public static Block moonSteelBlock = new BlockBuilder(MOD_ID)
 		.setSideTextures("moonsteel_block_side.png")
@@ -110,7 +112,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static Item cosmicBackpack;
 	static {
 		if (backpackPresent){
-			cosmicBackpack = ItemHelper.createItem(MOD_ID, new ItemBackpack("backpack.cosmic", itemId++, 18), "starpack.png").setMaxStackSize(1);
+			cosmicBackpack = ItemHelper.createItem(MOD_ID, new ItemStarBackpack("backpack.cosmic", itemId++), "starpack.png").setMaxStackSize(1);
 		} else {
 			cosmicBackpack = ItemHelper.createItem(MOD_ID, new Item("backpack.cosmic.missing", itemId++), "starpack.png").setNotInCreativeMenu().setMaxStackSize(1);
 		}
