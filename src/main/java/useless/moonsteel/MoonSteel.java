@@ -61,7 +61,9 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static int blockId = 2000;
 	public static int itemId = 17000;
 	public static Block moonSteelBlock = new BlockBuilder(MOD_ID)
-		.setTextures("moonsteel_block.png")
+		.setSideTextures("moonsteel_block_side.png")
+		.setTopTexture("moonsteel_block_top.png")
+		.setBottomTexture("moonsteel_block_bottom.png")
 		.setHardness(5f)
 		.setResistance(2000f)
 		.addTags(BlockTags.MINEABLE_BY_PICKAXE)
