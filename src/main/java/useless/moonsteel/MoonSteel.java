@@ -267,6 +267,16 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 			.addInput('D', Item.diamond)
 			.create("connected_star", connectedStar.getDefaultStack());
 
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"SSS",
+				"ICI",
+				"SSS")
+			.addInput('S', Item.ingotSteel)
+			.addInput('I', Item.ingotIron)
+			.addInput('C', connectedStar)
+			.create("stellar_rewinder", stellarRewinder.getDefaultStack());
+
 		if (backpackPresent){
 			RecipeBuilder.Shaped(MOD_ID)
 				.setShape(
