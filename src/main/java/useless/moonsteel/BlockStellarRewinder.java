@@ -26,7 +26,6 @@ public class BlockStellarRewinder extends BlockTileEntityRotatable {
 		TileEntityStellarRewinder rewinder = (TileEntityStellarRewinder) world.getBlockTileEntity(x,y,z);
 		if (heldItem != null && heldItem.getItem() == MoonSteel.connectedStar){
 			rewinder.linkStar(heldItem);
-			world.notifyBlockChange(x, y, z, this.id);
 			return true;
 		}
 		return false;

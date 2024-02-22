@@ -33,3 +33,5 @@ tile.moonsteel.torch.star.name=Stardust Torch
 tile.moonsteel.torch.star.desc=A magical source of light.
 
 tile.moonsteel.stellar.rewinder.name=Stellar Rewinder
+
+moonsteel.teleport.fail=Link could not be established, Stellar rewinder possibly missing.

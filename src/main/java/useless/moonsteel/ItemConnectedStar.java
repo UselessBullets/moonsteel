@@ -1,5 +1,6 @@
 package useless.moonsteel;
 
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -12,12 +13,22 @@ public class ItemConnectedStar extends Item {
 		super(name, id);
 	}
 
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
-		if (itemstack.getData().getBoolean("moonsteel$has_location") && itemstack.consumeItem(entityplayer)){
-			entityplayer.setPos(itemstack.getData().getInteger("moonsteel$x") + 0.5f, itemstack.getData().getInteger("moonsteel$y") + 2, itemstack.getData().getInteger("moonsteel$z") + 0.5f);
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		if (itemstack.getData().getBoolean("moonsteel$has_location")){
+			int destX = itemstack.getData().getInteger("moonsteel$x");
+			int destY = itemstack.getData().getInteger("moonsteel$y");
+			int destZ = itemstack.getData().getInteger("moonsteel$z");
+			TileEntity te = world.getBlockTileEntity(destX, destY, destZ);
+			if (te instanceof TileEntityStellarRewinder && ((TileEntityStellarRewinder) te).canTeleport(itemstack)){
+				Side side = ((TileEntityStellarRewinder) te).side;
+				entityplayer.setPos(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY() + 2, destZ + side.getOffsetZ() + 0.5f);
+				((TileEntityStellarRewinder) te).setInUse(false);
+			} else {
+				entityplayer.addChatMessage("moonsteel.teleport.fail");
+			}
 			itemstack.getData().putBoolean("moonsteel$has_location", false);
 		}
-		return false;
+		return itemstack;
 	}
 	public int getIconIndex(ItemStack itemstack) {
 		if (itemstack.getData().getBoolean("moonsteel$has_location")){
