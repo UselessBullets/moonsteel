@@ -6,6 +6,7 @@
   "mixins": [
     "ArmorZombieRendererMixin",
     "BlockMixin",
+    "ChunkProviderServerMixin",
     "ChunkProviderStaticMixin",
     "EntityItemMixin",
     "EntityLivingMixin",
