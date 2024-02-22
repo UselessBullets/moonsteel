@@ -43,9 +43,6 @@ import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint, ClientStartEntrypoint {
 	// TODO enderchest backpack integration
@@ -68,7 +65,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 
 	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3);
 	public static Item ingotMoonSteel = ItemHelper.createItem(MOD_ID, new Item("ingot.moonsteel", itemId++), "moonsteel_ingot.png");
-	public static Item rawMoonSteel = ItemHelper.createItem(MOD_ID, new Item("raw.moonsteel", itemId++), "moonsteel_ingot.png");
+	public static Item crudeMoonSteel = ItemHelper.createItem(MOD_ID, new Item("crude.moonsteel", itemId++), "moonsteel_crude.png");
 	public static Item toolAxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolAxe("tool.axe.moonsteel", itemId++, moonSteelTool), "moonsteel_axe.png");
 	public static Item toolPickaxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolPickaxe("tool.pickaxe.moonsteel", itemId++, moonSteelTool), "moonsteel_pickaxe.png");
 	public static Item toolShovelMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolShovel("tool.shovel.moonsteel", itemId++, moonSteelTool), "moonsteel_shovel.png");
@@ -124,10 +121,10 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 				" F ")
 			.addInput('F', fallenStar)
 			.addInput('S', Item.ingotSteelCrude)
-			.create("raw_moonsteel", rawMoonSteel.getDefaultStack());
+			.create("raw_moonsteel", crudeMoonSteel.getDefaultStack());
 
 		RecipeBuilder.BlastFurnace(MOD_ID)
-			.setInput(rawMoonSteel)
+			.setInput(crudeMoonSteel)
 			.create("moonsteel", ingotMoonSteel.getDefaultStack());
 
 		RecipeBuilder.Trommel(MOD_ID)
