@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "moonsteel",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Moon Steel",
+  "description": "Adds a new cosmic material to the game with fortunate properties.",
   "authors": [
-    "Turnip Labs"
+    "Useless"
   ],
   "contact": {
     "homepage": "",
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"useless.moonsteel.MoonSteel"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"useless.moonsteel.MoonSteel"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"useless.moonsteel.MoonSteel"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"useless.moonsteel.MoonSteel"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+      "moonsteel.mixins.json"
   ],
 
   "depends": {
