@@ -4,9 +4,11 @@
   "package": "useless.moonsteel.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ArmorZombieRendererMixin",
     "BlockMixin",
     "EntityLivingMixin",
     "EntityPlayerMixin",
+    "EntityZombieArmoredMixin",
     "ItemToolSwordAccessor",
     "WorldMixin"
   ],

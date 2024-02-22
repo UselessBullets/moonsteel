@@ -21,6 +21,7 @@ import net.minecraft.core.crafting.LookupFuelFurnaceBlast;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tag.ItemTags;
@@ -30,6 +31,7 @@ import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.item.tool.ItemToolShovel;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.sound.SoundType;
+import net.minecraft.core.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ArmorHelper;
@@ -47,7 +49,7 @@ import java.util.List;
 
 public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint, ClientStartEntrypoint {
 	// TODO enderchest backpack integration
-	// TODO moon grav with full armorset
+	// TODO moon grav with full armorset | done
 	// TODO fortune on tools | done
 	// TODO looting on sword | done
 	// TODO fallen star torches
@@ -72,7 +74,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static Item toolShovelMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolShovel("tool.shovel.moonsteel", itemId++, moonSteelTool), "moonsteel_shovel.png");
 	public static Item toolHoeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolHoe("tool.hoe.moonsteel", itemId++, moonSteelTool), "moonsteel_hoe.png");
 	public static Item toolSwordMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolSword("tool.sword.moonsteel", itemId++, moonSteelTool), "moonsteel_sword.png");
-	public static ArmorMaterial moonSteelArmor = ArmorHelper.createArmorMaterial(MOD_ID, "moonsteel", 800, 45f, 45f, 45f, 100f);
+	public static ArmorMaterial moonSteelArmor = ArmorHelper.createArmorMaterial(MOD_ID, "moonsteel", 800, 65f, 45f, 45f, 100f);
 	public static Item helmetMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("helmet.moonsteel", itemId++, moonSteelArmor, 0), "moonsteel_helmet.png");
 	public static Item chestplateMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("chestplate.moonsteel", itemId++, moonSteelArmor, 1), "moonsteel_chestplate.png");
 	public static Item leggingsMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("leggings.moonsteel", itemId++, moonSteelArmor, 2), "moonsteel_leggings.png");
@@ -94,6 +96,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		if (block instanceof BlockTallGrass) return true;
 		return false;
 	}
+	public static ItemStack starZombieSword = toolSwordMoonSteel.getDefaultStack();
     @Override
     public void onInitialize() {
         LOGGER.info("MoonSteel initialized.");
@@ -147,5 +150,11 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static void playSound(String soundPath, SoundType soundType, float x, float y, float z, float volume, float pitch){
 		if (Global.isServer) return;
 		Minecraft.getMinecraft(Minecraft.class).sndManager.playSound(soundPath, soundType, x, y, z, volume, pitch);
+	}
+	public static boolean isStarTime(World world){
+		if (world.worldType.hasCeiling()) return false;
+		if (world.isDaytime()) return false;
+		if (world.getWorldTime() % 2000 > 200) return false;
+		return true;
 	}
 }
