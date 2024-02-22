@@ -22,3 +22,8 @@ item.moonsteel.boots.moonsteel.name=Moonsteel Boots
 item.moonsteel.boots.moonsteel.desc=A pair of weightless moonsteel boots.
 item.moonsteel.fallenstar.name=Fallen Star
 item.moonsteel.fallenstar.desc=A fallen stellar object with interesting properties.
+
+tile.moonsteel.block.name=Block of Moonsteel
+tile.moonsteel.block.desc=A solid block of moonsteel.
+tile.moonsteel.torch.star.name=Stardust Torch
+tile.moonsteel.torch.star.desc=A magical source of light.

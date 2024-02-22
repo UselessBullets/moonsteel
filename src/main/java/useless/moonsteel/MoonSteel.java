@@ -53,7 +53,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	// TODO moon grav with full armorset | done
 	// TODO fortune on tools | done
 	// TODO looting on sword | done
-	// TODO fallen star torches
+	// TODO fallen star torches | done
 	// TODO Recipes | done
 	// TODO fuels | done
     public static final String MOD_ID = "moonsteel";
@@ -140,9 +140,9 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(
-				" M ",
-				" M ",
-				" S ")
+				"M",
+				"M",
+				"S")
 			.addInput('M', ingotMoonSteel)
 			.addInput('S', Item.stick)
 			.create("moonsteel_sword", toolSwordMoonSteel.getDefaultStack());
@@ -158,27 +158,27 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(
-				"MM ",
-				"MS ",
-				" S ")
+				"MM",
+				"MS",
+				" S")
 			.addInput('M', ingotMoonSteel)
 			.addInput('S', Item.stick)
 			.create("moonsteel_axe", toolAxeMoonSteel.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(
-				" M ",
-				" S ",
-				" S ")
+				"M",
+				"S",
+				"S")
 			.addInput('M', ingotMoonSteel)
 			.addInput('S', Item.stick)
 			.create("moonsteel_shovel", toolShovelMoonSteel.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(
-				"MM ",
-				" S ",
-				" S ")
+				"MM",
+				" S",
+				" S")
 			.addInput('M', ingotMoonSteel)
 			.addInput('S', Item.stick)
 			.create("moonsteel_hoe", toolHoeMoonSteel.getDefaultStack());
@@ -214,6 +214,22 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 				"   ")
 			.addInput('M', ingotMoonSteel)
 			.create("moonsteel_boots", bootsMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+				.setShape(
+					"MMM",
+					"MMM",
+					"MMM")
+			.addInput('M', ingotMoonSteel)
+			.create("block_of_moonsteel", moonSteelBlock.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"F",
+				"S")
+			.addInput('F', fallenStar)
+			.addInput('S', Item.stick)
+			.create("stardust_torches", new ItemStack(torchStar, 8));
 
 		RecipeBuilder.BlastFurnace(MOD_ID)
 			.setInput(crudeMoonSteel)
