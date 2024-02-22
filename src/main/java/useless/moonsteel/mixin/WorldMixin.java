@@ -1,5 +1,6 @@
 package useless.moonsteel.mixin;
 
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.sound.SoundType;
@@ -15,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import useless.moonsteel.EntityFallenStar;
 import useless.moonsteel.MoonSteel;
 
 import java.util.Iterator;
@@ -44,6 +46,9 @@ public abstract class WorldMixin {
 	@Shadow
 	public Random rand;
 
+	@Shadow
+	public abstract boolean entityJoinedWorld(Entity entity);
+
 	@Unique
 	public int soundDelay = 0;
 
@@ -55,9 +60,7 @@ public abstract class WorldMixin {
 	}
 	@Inject(method = "updateBlocksAndPlayCaveSounds()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;getChunkFromChunkCoords(II)Lnet/minecraft/core/world/chunk/Chunk;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
 	private void makeTheStarsFall(CallbackInfo ci, Iterator var1, ChunkCoordinate coordinate, int chunkBlockX, int chunkBlockZ){
-		if (worldType.hasCeiling()) return;
-		if (this.isDaytime()) return;
-		if (this.getWorldTime() % 2000 > 200) return;
+		if (!MoonSteel.isStarTime((World) (Object)this)) return;
 		Chunk chunk = this.getChunkFromChunkCoords(coordinate.x, coordinate.z);
 		if (rand.nextInt(1500) == 0){
 			this.updateLCG = this.updateLCG * 3 + 1013904223;
@@ -65,7 +68,14 @@ public abstract class WorldMixin {
 			int blockX = chunk.xPosition * 16 + (randVal & 0xF);
 			int blockZ = chunk.zPosition * 16 + (randVal / 256 & 0xF);
 
-			dropItem(blockX, worldType.getMaxY() + 32, blockZ, MoonSteel.fallenStar.getDefaultStack()).viewScale = 5;
+			float f = 0.7f;
+			double x1 = (double)(this.rand.nextFloat() * f) + (double)(1.0f - f) * 0.5;
+			double y1 = (double)(this.rand.nextFloat() * f) + (double)(1.0f - f) * 0.5;
+			double z1 = (double)(this.rand.nextFloat() * f) + (double)(1.0f - f) * 0.5;
+			EntityFallenStar star = new EntityFallenStar((World) (Object)this, (double)blockX + x1, (double)worldType.getMaxY() + 32 + y1, (double)blockZ + z1);
+			star.delayBeforeCanPickup = 10;
+			this.entityJoinedWorld(star);
+
 			if (soundDelay <= 0){
 				MoonSteel.playSound("moonsteel.starspawn", SoundType.ENTITY_SOUNDS, blockX, worldType.getMaxY() + 32, blockZ, 750.0f, 1f + rand.nextFloat() * 0.1f);
 				soundDelay = rand.nextInt(10) + 3;
