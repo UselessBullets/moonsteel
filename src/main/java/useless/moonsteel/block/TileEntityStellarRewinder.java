@@ -4,6 +4,8 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.world.chunk.Chunk;
+import useless.moonsteel.MoonSteel;
 
 public class TileEntityStellarRewinder extends TileEntity {
 	public boolean inUse = false;
@@ -13,6 +15,18 @@ public class TileEntityStellarRewinder extends TileEntity {
 	public ItemStack linkStar(ItemStack stack){
 		checkCode = worldObj.rand.nextLong();
 		side = Side.getSideById(worldObj.getBlockMetadata(x, y, z));
+		if (stack.getData().getBoolean("moonsteel$has_location")){
+			int destX = stack.getData().getInteger("moonsteel$x");
+			int destY = stack.getData().getInteger("moonsteel$y");
+			int destZ = stack.getData().getInteger("moonsteel$z");
+			MoonSteel.forceChunkLoads = true;
+			Chunk chunk = worldObj.getChunkProvider().provideChunk(destX >> 4, destZ >> 4);
+			MoonSteel.forceChunkLoads = false;
+			TileEntity te = chunk.getTileEntity(destX &0xF, destY, destZ &0xF);
+			if (te instanceof TileEntityStellarRewinder && ((TileEntityStellarRewinder) te).canTeleport(stack)){
+				((TileEntityStellarRewinder) te).setInUse(false);
+			} 
+		}
 		stack.getData().putBoolean("moonsteel$has_location", true);
 		stack.getData().putInt("moonsteel$x", x );
 		stack.getData().putInt("moonsteel$y", y );
