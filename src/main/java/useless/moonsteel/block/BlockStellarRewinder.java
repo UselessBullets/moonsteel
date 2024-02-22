@@ -1,4 +1,4 @@
-package useless.moonsteel;
+package useless.moonsteel.block;
 
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
@@ -9,6 +9,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import turniplabs.halplibe.helper.TextureHelper;
+import useless.moonsteel.MoonSteel;
 
 public class BlockStellarRewinder extends BlockTileEntityRotatable {
 	//Uses BlockTileEntityRotatable for its rotation properties not because its a tileEntity

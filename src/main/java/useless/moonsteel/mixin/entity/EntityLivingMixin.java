@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin;
+package useless.moonsteel.mixin.entity;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
@@ -13,8 +13,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import useless.moonsteel.IMoonGrav;
+import useless.moonsteel.interfaces.IMoonGrav;
 import useless.moonsteel.MoonSteel;
+import useless.moonsteel.mixin.accessor.ItemToolSwordAccessor;
 
 @Mixin(value = EntityLiving.class, remap = false)
 public abstract class EntityLivingMixin extends Entity {

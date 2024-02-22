@@ -1,9 +1,11 @@
-package useless.moonsteel;
+package useless.moonsteel.block;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
 import net.minecraft.core.block.BlockTorch;
 import net.minecraft.core.world.World;
+import useless.moonsteel.fx.EntityMagicSmokeFX;
+import useless.moonsteel.fx.EntityStarFX;
 
 import java.util.Random;
 

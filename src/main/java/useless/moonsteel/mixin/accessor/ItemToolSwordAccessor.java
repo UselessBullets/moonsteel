@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin;
+package useless.moonsteel.mixin.accessor;
 
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;

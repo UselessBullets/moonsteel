@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import useless.moonsteel.IStarZombie;
+import useless.moonsteel.interfaces.IStarZombie;
 
 @Mixin(value = ArmoredZombieRenderer.class, remap = false)
 public class ArmorZombieRendererMixin extends MobRenderer<EntityArmoredZombie> {

@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin;
+package useless.moonsteel.mixin.entity;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.entity.EntityItem;
@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import useless.moonsteel.IMoonGrav;
-import useless.moonsteel.IStarZombie;
+import useless.moonsteel.interfaces.IMoonGrav;
+import useless.moonsteel.interfaces.IStarZombie;
 import useless.moonsteel.MoonSteel;
 
 @Mixin(value = EntityArmoredZombie.class, remap = false)

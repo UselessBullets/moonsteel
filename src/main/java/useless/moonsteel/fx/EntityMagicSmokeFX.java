@@ -1,4 +1,4 @@
-package useless.moonsteel;
+package useless.moonsteel.fx;
 
 import net.minecraft.client.entity.fx.EntitySmokeFX;
 import net.minecraft.client.render.Tessellator;

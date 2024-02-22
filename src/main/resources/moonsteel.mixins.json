@@ -8,11 +8,11 @@
     "BlockMixin",
     "ChunkProviderServerMixin",
     "ChunkProviderStaticMixin",
-    "EntityItemMixin",
-    "EntityLivingMixin",
-    "EntityPlayerMixin",
-    "EntityZombieArmoredMixin",
-    "ItemToolSwordAccessor",
+    "entity.EntityItemMixin",
+    "entity.EntityLivingMixin",
+    "entity.EntityPlayerMixin",
+    "entity.EntityZombieArmoredMixin",
+    "accessor.ItemToolSwordAccessor",
     "WorldMixin"
   ],
   "client": [

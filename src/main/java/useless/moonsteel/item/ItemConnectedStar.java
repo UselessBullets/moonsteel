@@ -1,4 +1,4 @@
-package useless.moonsteel;
+package useless.moonsteel.item;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -8,6 +8,8 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
 import turniplabs.halplibe.helper.TextureHelper;
+import useless.moonsteel.MoonSteel;
+import useless.moonsteel.block.TileEntityStellarRewinder;
 
 public class ItemConnectedStar extends Item {
 	public ItemConnectedStar(String name, int id) {

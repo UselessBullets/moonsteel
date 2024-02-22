@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin;
+package useless.moonsteel.mixin.entity;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.entity.Entity;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import useless.moonsteel.IFallenStar;
+import useless.moonsteel.interfaces.IFallenStar;
 import useless.moonsteel.MoonSteel;
 
 @Mixin(value = EntityItem.class, remap = false)

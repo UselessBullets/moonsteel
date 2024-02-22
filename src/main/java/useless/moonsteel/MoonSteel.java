@@ -2,12 +2,10 @@ package useless.moonsteel;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockFurnace;
 import net.minecraft.core.block.BlockLeavesBase;
 import net.minecraft.core.block.BlockOreCoal;
 import net.minecraft.core.block.BlockOreDiamond;
@@ -17,7 +15,6 @@ import net.minecraft.core.block.BlockOreLapis;
 import net.minecraft.core.block.BlockOreNetherCoal;
 import net.minecraft.core.block.BlockOreRedstone;
 import net.minecraft.core.block.BlockTallGrass;
-import net.minecraft.core.block.BlockTorch;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.crafting.LookupFuelFurnace;
@@ -38,7 +35,6 @@ import net.minecraft.core.sound.SoundType;
 import net.minecraft.core.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.ModItems;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import turniplabs.halplibe.helper.ArmorHelper;
@@ -52,6 +48,10 @@ import turniplabs.halplibe.helper.TextureHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
+import useless.moonsteel.block.BlockStellarRewinder;
+import useless.moonsteel.block.BlockTorchStar;
+import useless.moonsteel.block.TileEntityStellarRewinder;
+import useless.moonsteel.item.ItemConnectedStar;
 
 
 public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint, ClientStartEntrypoint {

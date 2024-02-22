@@ -1,4 +1,4 @@
-package useless.moonsteel;
+package useless.moonsteel.block;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
