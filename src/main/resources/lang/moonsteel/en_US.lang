@@ -23,7 +23,9 @@ item.moonsteel.boots.moonsteel.desc=A pair of weightless moonsteel boots.
 item.moonsteel.star.fallen.name=Fallen Star
 item.moonsteel.star.fallen.desc=A fallen stellar object with interesting properties.
 item.moonsteel.backpack.cosmic.name=Stardust Backpack
+item.moonsteel.backpack.cosmic.desc=Stores your items in a pocket dimension.
 item.moonsteel.backpack.cosmic.missing.name=Install Better with Backpacks
+item.moonsteel.backpack.cosmic.missing.desc=This item does nothing without Better with Backpacks
 item.moonsteel.star.connected.name=Connected Star
 item.moonsteel.star.connected.desc=A star entangled with a location.
 
@@ -31,7 +33,7 @@ tile.moonsteel.block.name=Block of Moonsteel
 tile.moonsteel.block.desc=A solid block of moonsteel.
 tile.moonsteel.torch.star.name=Stardust Torch
 tile.moonsteel.torch.star.desc=A magical source of light.
-
 tile.moonsteel.stellar.rewinder.name=Stellar Rewinder
+tile.moonsteel.stellar.rewinder.desc=An anchor for a connect star to link to.
 
 moonsteel.teleport.fail=Link could not be established, Stellar rewinder possibly missing.

@@ -25,7 +25,7 @@ public class TileEntityStellarRewinder extends TileEntity {
 			TileEntity te = chunk.getTileEntity(destX &0xF, destY, destZ &0xF);
 			if (te instanceof TileEntityStellarRewinder && ((TileEntityStellarRewinder) te).canTeleport(stack)){
 				((TileEntityStellarRewinder) te).setInUse(false);
-			} 
+			}
 		}
 		stack.getData().putBoolean("moonsteel$has_location", true);
 		stack.getData().putInt("moonsteel$x", x );
