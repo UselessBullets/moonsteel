@@ -2,6 +2,8 @@ package useless.moonsteel;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.RenderBlocks;
+import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
@@ -14,6 +16,7 @@ import net.minecraft.core.block.BlockOreLapis;
 import net.minecraft.core.block.BlockOreNetherCoal;
 import net.minecraft.core.block.BlockOreRedstone;
 import net.minecraft.core.block.BlockTallGrass;
+import net.minecraft.core.block.BlockTorch;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.crafting.LookupFuelFurnace;
@@ -39,6 +42,7 @@ import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.ItemHelper;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.helper.SoundHelper;
+import turniplabs.halplibe.helper.TextureHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
@@ -62,6 +66,12 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		.setResistance(2000f)
 		.addTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new Block("block.moonsteel", blockId++, Material.metal));
+	public static Block torchStar = new BlockBuilder(MOD_ID)
+		.setTextures("startorch.png")
+		.setBlockModel(new BlockModelRenderBlocks(2))
+		.setLuminance(15)
+		.build(new BlockTorchStar("torch.star", blockId++))
+		.withDisabledNeighborNotifyOnMetadataChange();
 
 	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3);
 	public static Item ingotMoonSteel = ItemHelper.createItem(MOD_ID, new Item("ingot.moonsteel", itemId++), "moonsteel_ingot.png");
@@ -93,6 +103,11 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		if (block instanceof BlockTallGrass) return true;
 		return false;
 	}
+
+	static {
+		TextureHelper.getOrCreateItemTexture(MOD_ID, "particle_star.png");
+		TextureHelper.getOrCreateItemTexture(MOD_ID, "particle_magicsmoke.png");
+	}
 	public static ItemStack starZombieSword = toolSwordMoonSteel.getDefaultStack();
     @Override
     public void onInitialize() {
@@ -122,6 +137,83 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 			.addInput('F', fallenStar)
 			.addInput('S', Item.ingotSteelCrude)
 			.create("raw_moonsteel", crudeMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				" M ",
+				" M ",
+				" S ")
+			.addInput('M', ingotMoonSteel)
+			.addInput('S', Item.stick)
+			.create("moonsteel_sword", toolSwordMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"MMM",
+				" S ",
+				" S ")
+			.addInput('M', ingotMoonSteel)
+			.addInput('S', Item.stick)
+			.create("moonsteel_pickaxe", toolPickaxeMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"MM ",
+				"MS ",
+				" S ")
+			.addInput('M', ingotMoonSteel)
+			.addInput('S', Item.stick)
+			.create("moonsteel_axe", toolAxeMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				" M ",
+				" S ",
+				" S ")
+			.addInput('M', ingotMoonSteel)
+			.addInput('S', Item.stick)
+			.create("moonsteel_shovel", toolShovelMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"MM ",
+				" S ",
+				" S ")
+			.addInput('M', ingotMoonSteel)
+			.addInput('S', Item.stick)
+			.create("moonsteel_hoe", toolHoeMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"MMM",
+				"M M",
+				"   ")
+			.addInput('M', ingotMoonSteel)
+			.create("moonsteel_helmet", helmetMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"M M",
+				"MMM",
+				"MMM")
+			.addInput('M', ingotMoonSteel)
+			.create("moonsteel_chestplate", chestplateMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"MMM",
+				"M M",
+				"M M")
+			.addInput('M', ingotMoonSteel)
+			.create("moonsteel_leggings", leggingsMoonSteel.getDefaultStack());
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(
+				"M M",
+				"M M",
+				"   ")
+			.addInput('M', ingotMoonSteel)
+			.create("moonsteel_boots", bootsMoonSteel.getDefaultStack());
 
 		RecipeBuilder.BlastFurnace(MOD_ID)
 			.setInput(crudeMoonSteel)
