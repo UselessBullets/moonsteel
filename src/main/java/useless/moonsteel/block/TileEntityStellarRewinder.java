@@ -31,6 +31,7 @@ public class TileEntityStellarRewinder extends TileEntity {
 		stack.getData().putInt("moonsteel$x", x );
 		stack.getData().putInt("moonsteel$y", y );
 		stack.getData().putInt("moonsteel$z", z );
+		stack.getData().putInt("moonsteel$dimension", worldObj.dimension.id);
 		stack.getData().putLong("moonsteel$checkcode", checkCode);
 		setInUse(true);
 		return stack;

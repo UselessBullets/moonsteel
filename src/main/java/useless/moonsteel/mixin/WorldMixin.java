@@ -27,14 +27,8 @@ public abstract class WorldMixin {
 	public abstract Chunk getChunkFromChunkCoords(int x, int z);
 
 	@Shadow
-	public abstract long getWorldTime();
-
-	@Shadow
 	@Final
 	public WorldType worldType;
-
-	@Shadow
-	public abstract boolean isDaytime();
 
 	@Shadow
 	protected int updateLCG;

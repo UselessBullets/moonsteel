@@ -25,7 +25,7 @@ public abstract class BlockMixin {
 	private void multiplyHarvest(World world, EntityPlayer entityplayer, int x, int y, int z, int meta, TileEntity tileEntity, CallbackInfo ci){
 		ItemStack heldItemStack = entityplayer.inventory.getCurrentItem();
 		if (heldItemStack.getItem() instanceof ItemTool && ((ItemTool) heldItemStack.getItem()).getMaterial() == MoonSteel.moonSteelTool && MoonSteel.canBeFortuned((Block) (Object)this)){
-			for (int i = 0; i < world.rand.nextInt(3); i++) {
+			for (int i = 0; i < world.rand.nextInt(MoonSteel.FORTUNE_AMOUNT); i++) {
 				this.dropBlockWithCause(world, EnumDropCause.PROPER_TOOL, x, y, z, meta, tileEntity);
 			}
 		}

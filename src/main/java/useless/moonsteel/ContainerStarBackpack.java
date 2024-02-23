@@ -2,7 +2,6 @@ package useless.moonsteel;
 
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.slot.Slot;
 import useless.moonsteel.interfaces.IStarBackpack;

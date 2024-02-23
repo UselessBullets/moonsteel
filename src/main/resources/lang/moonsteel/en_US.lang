@@ -36,4 +36,5 @@ tile.moonsteel.torch.star.desc=A magical source of light.
 tile.moonsteel.stellar.rewinder.name=Stellar Rewinder
 tile.moonsteel.stellar.rewinder.desc=An anchor for a connect star to link to.
 
-moonsteel.teleport.fail=Link could not be established, Stellar rewinder possibly missing.
+moonsteel.teleport.fail.missing=Link could not be established, Stellar rewinder possibly missing.
+moonsteel.teleport.fail.dimension=Star is linked to a different dimension.

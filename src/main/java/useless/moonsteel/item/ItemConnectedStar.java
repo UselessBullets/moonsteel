@@ -22,6 +22,11 @@ public class ItemConnectedStar extends Item {
 			int destX = itemstack.getData().getInteger("moonsteel$x");
 			int destY = itemstack.getData().getInteger("moonsteel$y");
 			int destZ = itemstack.getData().getInteger("moonsteel$z");
+			int dim = itemstack.getData().getInteger("moonsteel$dimension");
+			if (dim != world.dimension.id) {
+				entityplayer.addChatMessage("moonsteel.teleport.fail.dimension");
+				return itemstack;
+			}
 			MoonSteel.forceChunkLoads = true;
 			Chunk chunk = world.getChunkProvider().provideChunk(destX >> 4, destZ >> 4);
 			MoonSteel.forceChunkLoads = false;
@@ -31,7 +36,7 @@ public class ItemConnectedStar extends Item {
 				MoonSteel.teleport(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY(), destZ + side.getOffsetZ() + 0.5f, entityplayer);
 				((TileEntityStellarRewinder) te).setInUse(false);
 			} else if (!world.isClientSide) {
-				entityplayer.addChatMessage("moonsteel.teleport.fail");
+				entityplayer.addChatMessage("moonsteel.teleport.fail.missing");
 			}
 			itemstack.getData().putBoolean("moonsteel$has_location", false);
 		}

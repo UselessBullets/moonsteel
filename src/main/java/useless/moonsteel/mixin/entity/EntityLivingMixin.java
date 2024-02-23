@@ -55,7 +55,7 @@ public abstract class EntityLivingMixin extends Entity {
 		if (entity instanceof EntityPlayer){
 			ItemStack heldStack = ((EntityPlayer) entity).getHeldItem();
 			if (heldStack != null && heldStack.getItem() instanceof ItemToolSword && ((ItemToolSwordAccessor) heldStack.getItem()).getMaterial() == MoonSteel.moonSteelTool){
-				for (int i = 0; i < random.nextInt(3); i++) {
+				for (int i = 0; i < random.nextInt(MoonSteel.LOOTING_AMOUNT); i++) {
 					dropFewItems();
 				}
 			}
