@@ -42,6 +42,7 @@ import tosutosu.betterwithbackpacks.ModItems;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.BlockBuilder;
+import turniplabs.halplibe.helper.CreativeHelper;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ItemHelper;
 import turniplabs.halplibe.helper.ModVersionHelper;
@@ -114,8 +115,8 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3);
 	public static Item ingotMoonSteel = ItemHelper.createItem(MOD_ID, new Item("ingot.moonsteel", itemId++), "moonsteel_ingot.png");
 	public static Item crudeMoonSteel = ItemHelper.createItem(MOD_ID, new Item("crude.moonsteel", itemId++), "moonsteel_crude.png");
-	public static Item toolAxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolAxe("tool.axe.moonsteel", itemId++, moonSteelTool), "moonsteel_axe.png");
 	public static Item toolPickaxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolPickaxe("tool.pickaxe.moonsteel", itemId++, moonSteelTool), "moonsteel_pickaxe.png");
+	public static Item toolAxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolAxe("tool.axe.moonsteel", itemId++, moonSteelTool), "moonsteel_axe.png");
 	public static Item toolShovelMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolShovel("tool.shovel.moonsteel", itemId++, moonSteelTool), "moonsteel_shovel.png");
 	public static Item toolHoeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolHoe("tool.hoe.moonsteel", itemId++, moonSteelTool), "moonsteel_hoe.png");
 	public static Item toolSwordMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolSword("tool.sword.moonsteel", itemId++, moonSteelTool), "moonsteel_sword.png");
@@ -169,6 +170,9 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	@Override
 	public void beforeGameStart() {
 		EntityHelper.Core.createTileEntity(TileEntityStellarRewinder.class, "moonsteel$stellar_rewinder");
+		if (backpackPresent){
+			CreativeHelper.setParent(cosmicBackpack.getDefaultStack(), ModItems.DiamondBackpack.getDefaultStack());
+		}
 	}
 
 	@Override

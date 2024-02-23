@@ -3,8 +3,8 @@
   "id": "moonsteel",
   "version": "${version}",
 
-  "name": "Moon Steel",
-  "description": "Adds a new cosmic material to the game with fortunate properties.",
+  "name": "MoonMoonMoon",
+  "description": "Adds a new cosmic material to the game with special properties.",
   "authors": [
     "Useless"
   ],
@@ -39,8 +39,9 @@
   ],
 
   "depends": {
+		"minecraft": ">=7.1-beta.1",
     "fabricloader": ">=0.13.3",
-		"halplibe": ">=3.3.0"
+		"halplibe": ">=3.4.0"
   },
   "suggests": {
 		"betterwithbackpacks": ">=1.0.0"
