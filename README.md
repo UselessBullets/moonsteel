@@ -19,6 +19,10 @@ MoonMoonMoon is a mod that adds a cosmic new material to BTA called Moonsteel. M
 - Stardust Torches, even brighter than normal torches with custom particles
 - Fallen stars can be used a furnace and blast furnace fuel to smelt 48 items
 
+## Languages
+- English - en_US
+- Russian - ru_RU
+
 ## Installation
 
 ### Requires:
