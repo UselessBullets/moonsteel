@@ -160,6 +160,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	}
 	public static ItemStack starZombieSword = toolSwordMoonSteel.getDefaultStack();
 	public static boolean forceChunkLoads = false;
+	public static int soundDelay = 0;
     @Override
     public void onInitialize() {
         LOGGER.info("MoonSteel initialized.");

@@ -19,6 +19,7 @@
     "entity.EntityZombieArmoredMixin"
   ],
   "client": [
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1

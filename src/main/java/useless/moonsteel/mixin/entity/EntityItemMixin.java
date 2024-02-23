@@ -4,6 +4,7 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.sound.SoundType;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,6 +29,10 @@ public abstract class EntityItemMixin extends Entity implements IFallenStar {
 	private void constuct1(World world, double d, double d1, double d2, ItemStack itemstack, CallbackInfo ci){
 		if (itemstack.getItem() == MoonSteel.fallenStar){
 			viewScale = 5;
+			if (MoonSteel.soundDelay <= 0 && this.y > world.getWorldType().getMaxY()){
+				MoonSteel.playSound("moonsteel.starspawn", SoundType.ENTITY_SOUNDS, (float) x, (float) y, (float) z, 750.0f, 1f + random.nextFloat() * 0.1f);
+				MoonSteel.soundDelay = random.nextInt(10) + 3;
+			}
 		}
 	}
 	@Inject(method = "tick()V", at = @At("TAIL"))

@@ -38,16 +38,6 @@ public abstract class WorldMixin {
 
 	@Shadow
 	public Random rand;
-
-	@Unique
-	public int soundDelay = 0;
-
-	@Inject(method = "tick", at = @At("HEAD"))
-	private void tick(CallbackInfo ci){
-		if (soundDelay > 0){
-			soundDelay--;
-		}
-	}
 	@Inject(method = "updateBlocksAndPlayCaveSounds()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;getChunkFromChunkCoords(II)Lnet/minecraft/core/world/chunk/Chunk;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
 	private void makeTheStarsFall(CallbackInfo ci, Iterator var1, ChunkCoordinate coordinate, int chunkBlockX, int chunkBlockZ){
 		if (!MoonSteel.isStarTime((World) (Object)this)) return;
@@ -59,10 +49,6 @@ public abstract class WorldMixin {
 			int blockZ = chunk.zPosition * 16 + (randVal / 256 & 0xF);
 
 			((IFallenStar)dropItem(blockX, worldType.getMaxY() + 32, blockZ, MoonSteel.fallenStar.getDefaultStack())).moonsteel$setDaylightSensitive(true);
-			if (soundDelay <= 0){
-				MoonSteel.playSound("moonsteel.starspawn", SoundType.ENTITY_SOUNDS, blockX, worldType.getMaxY() + 32, blockZ, 750.0f, 1f + rand.nextFloat() * 0.1f);
-				soundDelay = rand.nextInt(10) + 3;
-			}
 		}
 	}
 }
