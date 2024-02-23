@@ -18,3 +18,12 @@ MoonMoonMoon is a mod that adds a cosmic new material to BTA called Moonsteel. M
 - Star Zombies, if a Armored Zombie spawns while stars are falling it will spawn as a Star Zombie
 - Stardust Torches, even brighter than normal torches with custom particles
 - Fallen stars can be used a furnace and blast furnace fuel to smelt 48 items
+
+## Installation
+
+### Requires:
+- BTA
+- Babric (https://github.com/Turnip-Labs/babric-instance-repo/releases)
+- HalpLibe (https://github.com/Turnip-Labs/bta-halplibe)
+### Recommends:
+- BetterWithBackpacks (https://github.com/UselessSolutions/bta-backpacks/releases)
