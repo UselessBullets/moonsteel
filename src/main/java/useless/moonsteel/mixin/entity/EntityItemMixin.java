@@ -30,8 +30,8 @@ public abstract class EntityItemMixin extends Entity implements IFallenStar {
 		if (itemstack.getItem() == MoonSteel.fallenStar){
 			viewScale = 30;
 			if (MoonSteel.soundDelay <= 0 && this.y > world.getWorldType().getMaxY()){
-				MoonSteel.playSound("moonsteel.starspawn", SoundType.WEATHER_SOUNDS, (float) x, (float) y, (float) z, 750.0f, 1f + random.nextFloat() * 0.1f);
-				MoonSteel.soundDelay = random.nextInt(10) + 3;
+				MoonSteel.playSound("moonsteel.starspawn", SoundType.WEATHER_SOUNDS, (float) x, world.findTopSolidBlock((int) x, (int) z) + 10, (float) z, 5, 1f + random.nextFloat() * 0.1f);
+//				MoonSteel.soundDelay = random.nextInt(10) + 3;
 			}
 		}
 	}
