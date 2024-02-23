@@ -13,7 +13,7 @@ MoonMoonMoon is a mod that adds a cosmic new material to BTA called Moonsteel. M
 - Moonsteel armor has the durabilty of diamond, with protection stats of [65, 45, 100, 45] when wearing the full set
 - Each piece of Moonsteel armor reduces your gravity slightly, wear a full set for maxiumum gravity reduction
 - Fallen Stars rain on your world at night, pick them up fast before they despawn at day
-- Connect stars can be used on a Stellar Rewinder to set the location for the Connect Star to teleport you to
+- Connected stars can be used on a Stellar Rewinder to set the location for the Connected to teleport you to
 - Stardust Backpack (if better with backpacks installed) acts like an enderchest, all star dust backpacks share they same inventory linked to each individual player
 - Star Zombies, if a Armored Zombie spawns while stars are falling it will spawn as a Star Zombie
 - Stardust Torches, even brighter than normal torches with custom particles
