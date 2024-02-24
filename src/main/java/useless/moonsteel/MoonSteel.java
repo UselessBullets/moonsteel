@@ -112,7 +112,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		.build(new BlockStellarRewinder("stellar.rewinder", blockId++, Material.metal))
 		.withImmovableFlagSet();
 
-	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3);
+	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3).setDamage(2);
 	public static Item ingotMoonSteel = ItemHelper.createItem(MOD_ID, new Item("ingot.moonsteel", itemId++), "moonsteel_ingot.png");
 	public static Item crudeMoonSteel = ItemHelper.createItem(MOD_ID, new Item("crude.moonsteel", itemId++), "moonsteel_crude.png");
 	public static Item toolPickaxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolPickaxe("tool.pickaxe.moonsteel", itemId++, moonSteelTool), "moonsteel_pickaxe.png");
