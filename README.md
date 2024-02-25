@@ -17,7 +17,7 @@ MoonMoonMoon is a mod that adds a cosmic new material to BTA called Moonsteel. M
 - Stardust Backpack (if better with backpacks installed) acts like an enderchest, all star dust backpacks share they same inventory linked to each individual player
 - Star Zombies, if an Armored Zombie spawns while stars are falling it will spawn as a Star Zombie
 - Stardust Torches, even brighter than normal torches with custom particles
-- Fallen stars can be used a furnace and blast furnace fuel to smelt 48 items
+- Fallen stars can be used in a furnace and blast furnace fuel to smelt 48 items
 
 ## Languages
 - English - en_US
