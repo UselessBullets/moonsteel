@@ -39,7 +39,6 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tosutosu.betterwithbackpacks.ModItems;
-import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.CreativeHelper;
@@ -65,6 +64,7 @@ import java.util.Properties;
 public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint, ClientStartEntrypoint {
     public static final String MOD_ID = "moonsteel";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static boolean backpackPresent = ModVersionHelper.isModPresent("betterwithbackpacks");
 	public static int blockId;
 	public static int itemId;
 	public static int GUI_ID;
@@ -90,7 +90,6 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 
 		config.updateConfig();
 	}
-	public static boolean backpackPresent = ModVersionHelper.isModPresent("betterwithbackpacks");
 	public static Block moonSteelBlock = new BlockBuilder(MOD_ID)
 		.setSideTextures("moonsteel_block_side.png")
 		.setTopTexture("moonsteel_block_top.png")
@@ -134,13 +133,6 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		TextureHelper.getOrCreateItemTexture(MoonSteel.MOD_ID, "connected_star.png");
 	}
 	public static Item cosmicBackpack;
-	static {
-		if (backpackPresent){
-			cosmicBackpack = ItemHelper.createItem(MOD_ID, new ItemStarBackpack("backpack.cosmic", itemId++), "starpack.png").setMaxStackSize(1);
-		} else {
-			cosmicBackpack = ItemHelper.createItem(MOD_ID, new Item("backpack.cosmic.missing", itemId++), "starpack.png").setNotInCreativeMenu().setMaxStackSize(1);
-		}
-	}
 	public static Tag<Block> forceFortune = Tag.of("moonsteel$force_enable_fortune");
 	public static Tag<Block> forceNoFortune = Tag.of("moonsteel$force_disable_fortune");
 	public static boolean canBeFortuned(Block block){
@@ -166,6 +158,12 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static boolean forceChunkLoads = false;
     @Override
     public void onInitialize() {
+		LOGGER.info("Backpacks present: " + backpackPresent);
+		if (backpackPresent){
+			cosmicBackpack = IHateJava.makeTheFuckingBackpack();
+		} else {
+			cosmicBackpack = ItemHelper.createItem(MOD_ID, new Item("backpack.cosmic.missing", itemId++), "starpack.png").setNotInCreativeMenu().setMaxStackSize(1);
+		}
         LOGGER.info("MoonSteel initialized.");
     }
 

@@ -1,21 +1,11 @@
 package useless.moonsteel.mixin.entity;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.ListTag;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
-import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import useless.moonsteel.StarBackpackInventory;
-import useless.moonsteel.interfaces.IMoonGrav;
 import useless.moonsteel.MoonSteel;
-import useless.moonsteel.interfaces.IStarBackpack;
+import useless.moonsteel.interfaces.IMoonGrav;
 
 @Mixin(value = EntityPlayer.class, remap = false)
 public class EntityPlayerMixin implements IMoonGrav {

@@ -7,8 +7,10 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class MoonSteelMixinPlugin implements IMixinConfigPlugin {
+	private static final Supplier<Boolean> BACKPACKS = () -> FabricLoader.getInstance().isModLoaded("betterwithbackpacks");
 	@Override
 	public void onLoad(String mixinPackage) {
 
@@ -21,7 +23,7 @@ public class MoonSteelMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		if (mixinClassName.startsWith("useless.moonsteel.mixin.backpack")) return FabricLoader.getInstance().isModLoaded("moonsteel");
+		if (mixinClassName.startsWith("useless.moonsteel.mixin.backpack")) return BACKPACKS.get();
 		return true;
 	}
 
