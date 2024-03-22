@@ -70,6 +70,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public static int GUI_ID;
 	public static int FORTUNE_AMOUNT;
 	public static int LOOTING_AMOUNT;
+	public static int STAR_SPAWN_RATE;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_block_id","6700");
@@ -77,6 +78,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		prop.setProperty("gui_backpack_id","20");
 		prop.setProperty("fortune_amount","3");
 		prop.setProperty("looting_amount","3");
+		prop.setProperty("star_spawn_rate","7500");
 		ConfigHandler config = new ConfigHandler(MOD_ID,prop);
 
 		blockId = config.getInt("starting_block_id");
@@ -84,6 +86,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		GUI_ID = config.getInt("gui_backpack_id");
 		FORTUNE_AMOUNT = config.getInt("fortune_amount");
 		LOOTING_AMOUNT = config.getInt("looting_amount");
+		STAR_SPAWN_RATE=config.getInt("star_spawn_rate");
 
 		config.updateConfig();
 	}

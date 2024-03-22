@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin.entity;
+package useless.moonsteel.mixin.backpack;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;

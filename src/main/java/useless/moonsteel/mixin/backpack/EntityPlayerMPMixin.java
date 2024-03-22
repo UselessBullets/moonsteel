@@ -1,4 +1,4 @@
-package useless.moonsteel.mixin.entity;
+package useless.moonsteel.mixin.backpack;
 
 import net.minecraft.core.net.packet.Packet100OpenWindow;
 import net.minecraft.server.entity.player.EntityPlayerMP;
@@ -9,7 +9,7 @@ import useless.moonsteel.ContainerStarBackpack;
 import useless.moonsteel.MoonSteel;
 
 @Mixin(value = EntityPlayerMP.class, remap = false)
-public abstract class EntityPlayerMPMixin extends EntityPlayerMixin{
+public abstract class EntityPlayerMPMixin extends EntityPlayerMixin {
 	@Shadow
 	protected abstract void getNextWindowId();
 

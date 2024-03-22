@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import useless.moonsteel.MoonSteelMixinPlugin;
 import useless.moonsteel.interfaces.IFallenStar;
 import useless.moonsteel.MoonSteel;
 
@@ -42,7 +43,7 @@ public abstract class WorldMixin {
 	private void makeTheStarsFall(CallbackInfo ci, Iterator var1, ChunkCoordinate coordinate, int chunkBlockX, int chunkBlockZ){
 		if (!MoonSteel.isStarTime((World) (Object)this)) return;
 		Chunk chunk = this.getChunkFromChunkCoords(coordinate.x, coordinate.z);
-		if (rand.nextInt(2500) == 0){
+		if (rand.nextInt(MoonSteel.STAR_SPAWN_RATE) == 0){
 			this.updateLCG = this.updateLCG * 3 + 1013904223;
 			int randVal = this.updateLCG >> 2;
 			int blockX = chunk.xPosition * 16 + (randVal & 0xF);
