@@ -33,7 +33,7 @@ import net.minecraft.core.item.tool.ItemToolHoe;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.item.tool.ItemToolShovel;
 import net.minecraft.core.item.tool.ItemToolSword;
-import net.minecraft.core.sound.SoundType;
+import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
@@ -339,7 +339,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public void afterClientStart() {
 
 	}
-	public static void playSound(String soundPath, SoundType soundType, float x, float y, float z, float volume, float pitch){
+	public static void playSound(String soundPath, SoundCategory soundType, float x, float y, float z, float volume, float pitch){
 		if (Global.isServer) return;
 		Minecraft.getMinecraft(Minecraft.class).sndManager.playSound(soundPath, soundType, x, y, z, volume, pitch);
 	}

@@ -18,13 +18,14 @@ import useless.moonsteel.interfaces.IMoonGrav;
 import useless.moonsteel.interfaces.IStarZombie;
 
 @Mixin(value = EntityArmoredZombie.class, remap = false)
-public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav, IStarZombie {
-	@Shadow
-	@Final
-	public int[] armorBreakPoints;
+public abstract class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav, IStarZombie {
 	@Shadow
 	@Final
 	private boolean isHoldingSword;
+
+	@Shadow
+	public abstract int[] getArmorBreakPoints();
+
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
@@ -43,8 +44,9 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 	public double moonsteel$getGravScalar() {
 		if (moonsteel$isStarZombie()){
 			double scalar = 1d;
+			int[] breakPoints = this.getArmorBreakPoints();
 			for (int i = 0; i < 4; ++i) {
-				if (this.health > this.armorBreakPoints[i]) scalar -= 0.125d;
+				if (this.getHealth() > breakPoints[i]) scalar -= 0.125d;
 			}
 			return scalar;
 		}
@@ -78,6 +80,6 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav,
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		entityData.set(20, (byte)tag.getByte("moonsteel$starzombie"));
+		entityData.set(20, tag.getByte("moonsteel$starzombie"));
 	}
 }
