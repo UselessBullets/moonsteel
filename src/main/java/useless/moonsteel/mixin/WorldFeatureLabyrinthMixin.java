@@ -1,8 +1,12 @@
 package useless.moonsteel.mixin;
 
+import net.minecraft.core.WeightedRandomBag;
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeatureLabyrinth;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -12,10 +16,11 @@ import java.util.Random;
 
 @Mixin(value = WorldFeatureLabyrinth.class, remap = false)
 public class WorldFeatureLabyrinthMixin {
-	@Inject(method = "pickCheckLootItem(Ljava/util/Random;)Lnet/minecraft/core/item/ItemStack;", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I"), cancellable = true)
-	private void addLoot(Random random, CallbackInfoReturnable<ItemStack> cir){
-		if (random.nextInt(16) == 0 && random.nextInt(10) == 0){
-			cir.setReturnValue(new ItemStack(MoonSteel.crudeMoonSteel, random.nextInt(3) + 1));
-		}
+	@Shadow
+	public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
+
+	@Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V", ordinal = 0))
+	private void addLoot(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
+		chestLoot.addEntry(new WeightedRandomLootObject(MoonSteel.crudeMoonSteel.getDefaultStack(), 1, 4), 5d);
 	}
 }

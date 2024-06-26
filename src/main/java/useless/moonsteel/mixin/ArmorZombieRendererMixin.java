@@ -20,7 +20,7 @@ public class ArmorZombieRendererMixin extends MobRenderer<EntityArmoredZombie> {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/ArmoredZombieRenderer;loadTexture(Ljava/lang/String;)V", shift = At.Shift.AFTER))
 	private void starZombie(EntityArmoredZombie zombie, int renderPass, float partialTick, CallbackInfoReturnable<Boolean> cir){
 		if (((IStarZombie)zombie).moonsteel$isStarZombie()){
-			this.loadTexture("/assets/moonsteel/armor/moonsteel_" + (renderPass != 2 ? 1 : 2) + ".png");
+			this.loadTexture("/assets/moonsteel/textures/armor/moonsteel_" + (renderPass != 2 ? 1 : 2) + ".png");
 		}
 	}
 }

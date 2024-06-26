@@ -1,6 +1,5 @@
 package useless.moonsteel.item;
 
-import net.minecraft.core.Global;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -9,7 +8,6 @@ import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
-import turniplabs.halplibe.helper.TextureHelper;
 import useless.moonsteel.MoonSteel;
 import useless.moonsteel.block.TileEntityStellarRewinder;
 
@@ -18,19 +16,20 @@ public class ItemConnectedStar extends Item {
 		super(name, id);
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	@Override
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		if (itemstack.getData().getBoolean("moonsteel$has_location")){
 			int destX = itemstack.getData().getInteger("moonsteel$x");
 			int destY = itemstack.getData().getInteger("moonsteel$y");
 			int destZ = itemstack.getData().getInteger("moonsteel$z");
 			int dim = itemstack.getData().getInteger("moonsteel$dimension");
 			if (dim != world.dimension.id) {
-				entityplayer.addChatMessage("moonsteel.teleport.fail.dimension");
+				entityplayer.sendTranslatedChatMessage("moonsteel.teleport.fail.dimension");
 				return itemstack;
 			}
 			int cost = MathHelper.floor_double(entityplayer.distanceTo(destX, destY, destZ));
 			if (entityplayer.score < cost) {
-				entityplayer.addChatMessage("moonsteel.teleport.fail.score");
+				entityplayer.sendTranslatedChatMessage("moonsteel.teleport.fail.score");
 				return itemstack;
 			}
 			MoonSteel.forceChunkLoads = true;
@@ -43,16 +42,10 @@ public class ItemConnectedStar extends Item {
 				MoonSteel.teleport(destX + side.getOffsetX() + 0.5f, destY + side.getOffsetY(), destZ + side.getOffsetZ() + 0.5f, entityplayer);
 				((TileEntityStellarRewinder) te).setInUse(false);
 			} else if (!world.isClientSide) {
-				entityplayer.addChatMessage("moonsteel.teleport.fail.missing");
+				entityplayer.sendTranslatedChatMessage("moonsteel.teleport.fail.missing");
 			}
 			itemstack.getData().putBoolean("moonsteel$has_location", false);
 		}
 		return itemstack;
-	}
-	public int getIconIndex(ItemStack itemstack) {
-		if (itemstack.getData().getBoolean("moonsteel$has_location")){
-			return TextureHelper.getOrCreateItemTextureIndex(MoonSteel.MOD_ID, "connected_star.png");
-		}
-		return this.getIconFromDamage(itemstack.getMetadata());
 	}
 }

@@ -3,7 +3,8 @@ package useless.moonsteel;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
-import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.block.model.BlockModelTorch;
+import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
@@ -43,20 +44,20 @@ import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.CreativeHelper;
 import turniplabs.halplibe.helper.EntityHelper;
-import turniplabs.halplibe.helper.ItemHelper;
+import turniplabs.halplibe.helper.ItemBuilder;
 import turniplabs.halplibe.helper.ModVersionHelper;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.helper.SoundHelper;
-import turniplabs.halplibe.helper.TextureHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
+import useless.moonsteel.block.BlockModelStellarRewinder;
 import useless.moonsteel.block.BlockStellarRewinder;
 import useless.moonsteel.block.BlockTorchStar;
 import useless.moonsteel.block.TileEntityStellarRewinder;
 import useless.moonsteel.item.ItemConnectedStar;
-import useless.moonsteel.item.ItemStarBackpack;
+import useless.moonsteel.item.ItemModelConnectStar;
 
 import java.util.Properties;
 
@@ -91,53 +92,85 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		config.updateConfig();
 	}
 	public static Block moonSteelBlock = new BlockBuilder(MOD_ID)
-		.setSideTextures("moonsteel_block_side.png")
-		.setTopTexture("moonsteel_block_top.png")
-		.setBottomTexture("moonsteel_block_bottom.png")
+		.setSideTextures(MOD_ID + ":block/moonsteel_block_side")
+		.setTopTexture(MOD_ID + ":block/moonsteel_block_top")
+		.setBottomTexture(MOD_ID + ":block/moonsteel_block_bottom")
 		.setHardness(5f)
 		.setResistance(2000f)
 		.addTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new Block("block.moonsteel", blockId++, Material.metal));
 	public static Block torchStar = new BlockBuilder(MOD_ID)
-		.setTextures("startorch.png")
-		.setBlockModel(new BlockModelRenderBlocks(2))
+		.setTextures(MOD_ID + ":block/startorch")
+		.setBlockModel(BlockModelTorch::new)
 		.setLuminance(15)
 		.build(new BlockTorchStar("torch.star", blockId++))
 		.withDisabledNeighborNotifyOnMetadataChange();
 	public static Block stellarRewinder = new BlockBuilder(MOD_ID)
 		.setHardness(3.5f)
-		.setSideTextures("stellarrewinder_side.png")
-		.setNorthTexture("stellarrewinder_front_active.png")
-		.setNorthTexture("stellarrewinder_front.png")
-		.setTopBottomTexture("stellarrewinder_top.png")
+		.setSideTextures(MOD_ID + ":block/stellarrewinder_side")
+		.setNorthTexture(MOD_ID + ":block/stellarrewinder_front_active")
+		.setNorthTexture(MOD_ID + ":block/stellarrewinder_front")
+		.setBlockModel(BlockModelStellarRewinder::new)
+		.setTopBottomTextures(MOD_ID + ":block/stellarrewinder_top")
 		.addTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new BlockStellarRewinder("stellar.rewinder", blockId++, Material.metal))
 		.withImmovableFlagSet();
 
 	public static ToolMaterial moonSteelTool = new ToolMaterial().setDurability(1536).setEfficiency(7.0f, 14.0f).setMiningLevel(3).setDamage(2);
-	public static Item ingotMoonSteel = ItemHelper.createItem(MOD_ID, new Item("ingot.moonsteel", itemId++), "moonsteel_ingot.png");
-	public static Item crudeMoonSteel = ItemHelper.createItem(MOD_ID, new Item("crude.moonsteel", itemId++), "moonsteel_crude.png");
-	public static Item toolPickaxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolPickaxe("tool.pickaxe.moonsteel", itemId++, moonSteelTool), "moonsteel_pickaxe.png");
-	public static Item toolAxeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolAxe("tool.axe.moonsteel", itemId++, moonSteelTool), "moonsteel_axe.png");
-	public static Item toolShovelMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolShovel("tool.shovel.moonsteel", itemId++, moonSteelTool), "moonsteel_shovel.png");
-	public static Item toolHoeMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolHoe("tool.hoe.moonsteel", itemId++, moonSteelTool), "moonsteel_hoe.png");
-	public static Item toolSwordMoonSteel = ItemHelper.createItem(MOD_ID, new ItemToolSword("tool.sword.moonsteel", itemId++, moonSteelTool), "moonsteel_sword.png");
+	public static Item ingotMoonSteel = new ItemBuilder(MOD_ID)
+	.setIcon(MOD_ID + ":item/moonsteel_ingot")
+	.build(new Item("ingot.moonsteel", itemId++));
+	public static Item crudeMoonSteel = new ItemBuilder(MOD_ID)
+	.setIcon(MOD_ID + ":item/moonsteel_crude")
+	.build(new Item("crude.moonsteel", itemId++));
+	public static Item toolPickaxeMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_pickaxe")
+		.setItemModel(item -> new ItemModelStandard(item, null).setFull3D())
+		.build(new ItemToolPickaxe("tool.pickaxe.moonsteel", itemId++, moonSteelTool));
+	public static Item toolAxeMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_axe")
+		.setItemModel(item -> new ItemModelStandard(item, null).setFull3D())
+		.build(new ItemToolAxe("tool.axe.moonsteel", itemId++, moonSteelTool));
+	public static Item toolShovelMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_shovel")
+		.setItemModel(item -> new ItemModelStandard(item, null).setFull3D())
+		.build(new ItemToolShovel("tool.shovel.moonsteel", itemId++, moonSteelTool));
+	public static Item toolHoeMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_hoe")
+		.setItemModel(item -> new ItemModelStandard(item, null).setFull3D())
+		.build(new ItemToolHoe("tool.hoe.moonsteel", itemId++, moonSteelTool));
+	public static Item toolSwordMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_sword")
+		.setItemModel(item -> new ItemModelStandard(item, null).setFull3D())
+		.build(new ItemToolSword("tool.sword.moonsteel", itemId++, moonSteelTool));
 	public static ArmorMaterial moonSteelArmor = ArmorHelper.createArmorMaterial(MOD_ID, "moonsteel", 800, 51f, 45f, 45f, 100f);
-	public static Item helmetMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("helmet.moonsteel", itemId++, moonSteelArmor, 0), "moonsteel_helmet.png");
-	public static Item chestplateMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("chestplate.moonsteel", itemId++, moonSteelArmor, 1), "moonsteel_chestplate.png");
-	public static Item leggingsMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("leggings.moonsteel", itemId++, moonSteelArmor, 2), "moonsteel_leggings.png");
-	public static Item bootsMoonSteel = ItemHelper.createItem(MOD_ID, new ItemArmor("boots.moonsteel", itemId++, moonSteelArmor, 3), "moonsteel_boots.png");
-	public static Item fallenStar = ItemHelper.createItem(MOD_ID, new Item("star.fallen", itemId++), "fallen_star.png").withTags(ItemTags.renderFullbright);
-	public static Item connectedStar = ItemHelper.createItem(MOD_ID, new ItemConnectedStar("star.connected", itemId++), "connected_star_off.png").withTags(ItemTags.renderFullbright).setMaxStackSize(1);
-	static {
-		TextureHelper.getOrCreateItemTexture(MoonSteel.MOD_ID, "connected_star.png");
-	}
+	public static Item helmetMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_helmet")
+		.build(new ItemArmor("helmet.moonsteel", itemId++, moonSteelArmor, 0));
+	public static Item chestplateMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_chestplate")
+		.build(new ItemArmor("chestplate.moonsteel", itemId++, moonSteelArmor, 1));
+	public static Item leggingsMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_leggings")
+		.build(new ItemArmor("leggings.moonsteel", itemId++, moonSteelArmor, 2));
+	public static Item bootsMoonSteel = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/moonsteel_boots")
+		.build(new ItemArmor("boots.moonsteel", itemId++, moonSteelArmor, 3));
+	public static Item fallenStar = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/fallen_star")
+		.setItemModel((i) -> new ItemModelStandard(i, null).setFullBright())
+		.build(new Item("star.fallen", itemId++));
+	public static Item connectedStar = new ItemBuilder(MOD_ID)
+		.setIcon(MOD_ID + ":item/connected_star_off")
+		.setItemModel((i) -> new ItemModelConnectStar(i, null).setFullBright())
+		.setStackSize(1)
+		.build(new ItemConnectedStar("star.connected", itemId++));
 	public static Item cosmicBackpack;
-	public static Tag<Block> forceFortune = Tag.of("moonsteel$force_enable_fortune");
-	public static Tag<Block> forceNoFortune = Tag.of("moonsteel$force_disable_fortune");
+	public static Tag<Block> FORCE_FORTUNE = Tag.of("moonsteel$force_enable_fortune");
+	public static Tag<Block> FORCE_NO_FORTUNE = Tag.of("moonsteel$force_disable_fortune");
 	public static boolean canBeFortuned(Block block){
-		if (block.hasTag(forceFortune)) return true;
-		if (block.hasTag(forceNoFortune)) return false;
+		if (block.hasTag(FORCE_FORTUNE)) return true;
+		if (block.hasTag(FORCE_NO_FORTUNE)) return false;
 		if (block instanceof BlockLeavesBase) return true;
 		if (block instanceof BlockOreCoal) return true;
 		if (block instanceof BlockOreDiamond) return true;
@@ -150,10 +183,6 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		return false;
 	}
 
-	static {
-		TextureHelper.getOrCreateItemTexture(MOD_ID, "particle_star.png");
-		TextureHelper.getOrCreateItemTexture(MOD_ID, "particle_magicsmoke.png");
-	}
 	public static ItemStack starZombieSword = toolSwordMoonSteel.getDefaultStack();
 	public static boolean forceChunkLoads = false;
     @Override
@@ -162,14 +191,18 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		if (backpackPresent){
 			cosmicBackpack = IHateJava.makeTheFuckingBackpack();
 		} else {
-			cosmicBackpack = ItemHelper.createItem(MOD_ID, new Item("backpack.cosmic.missing", itemId++), "starpack.png").setNotInCreativeMenu().setMaxStackSize(1);
+			cosmicBackpack = new ItemBuilder(MOD_ID)
+				.setIcon(MOD_ID + ":block/starpack")
+				.setStackSize(1)
+				.setTags(ItemTags.NOT_IN_CREATIVE_MENU)
+				.build(new Item("backpack.cosmic.missing", itemId++));
 		}
         LOGGER.info("MoonSteel initialized.");
     }
 
 	@Override
 	public void beforeGameStart() {
-		EntityHelper.Core.createTileEntity(TileEntityStellarRewinder.class, "moonsteel$stellar_rewinder");
+		EntityHelper.createTileEntity(TileEntityStellarRewinder.class, "moonsteel$stellar_rewinder");
 		if (backpackPresent){
 			CreativeHelper.setParent(cosmicBackpack.getDefaultStack(), ModItems.DiamondBackpack.getDefaultStack());
 		}
@@ -331,8 +364,13 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	}
 
 	@Override
+	public void initNamespaces() {
+		RecipeBuilder.initNameSpace(MOD_ID);
+	}
+
+	@Override
 	public void beforeClientStart() {
-		SoundHelper.Client.addSound(MOD_ID, "starspawn.wav");
+		SoundHelper.addSound(MOD_ID, "starspawn.wav");
 	}
 
 	@Override

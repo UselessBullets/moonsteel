@@ -12,7 +12,8 @@ public class ItemStarBackpack extends ItemBackpack {
 	public ItemStarBackpack(String name, int id) {
 		super(name, id, StarBackpackInventory.starBackpackSize);
 	}
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	@Override
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		if (!world.isClientSide && BetterWithBackpacks.ENABLE_BACKPACKS) {
 			((IStarBackpack)entityplayer).moonsteel$displayGuiStarBackpack();
 		}

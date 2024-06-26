@@ -6,12 +6,12 @@ import net.minecraft.core.entity.monster.EntityArmoredZombie;
 import net.minecraft.core.entity.monster.EntityZombie;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import useless.moonsteel.MoonSteel;
 import useless.moonsteel.interfaces.IMoonGrav;
@@ -19,20 +19,22 @@ import useless.moonsteel.interfaces.IStarZombie;
 
 @Mixin(value = EntityArmoredZombie.class, remap = false)
 public abstract class EntityZombieArmoredMixin extends EntityZombie implements IMoonGrav, IStarZombie {
-	@Shadow
-	@Final
-	private boolean isHoldingSword;
 
 	@Shadow
 	public abstract int[] getArmorBreakPoints();
 
+	@Shadow
+	private boolean isHoldingSword;
+
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
-	@Override
-	public void init(){
+
+	@Inject(method = "init", at = @At("TAIL"))
+	public void init(CallbackInfo ci){
 		entityData.define(20, (byte)0);
 	}
+
 	@Override
 	public void spawnInit(){
 		super.spawnInit();
