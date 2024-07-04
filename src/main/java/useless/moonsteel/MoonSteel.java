@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.render.block.model.BlockModelTorch;
 import net.minecraft.client.render.item.model.ItemModelStandard;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
@@ -101,7 +102,11 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 		.build(new Block("block.moonsteel", blockId++, Material.metal));
 	public static Block torchStar = new BlockBuilder(MOD_ID)
 		.setTextures(MOD_ID + ":block/startorch")
-		.setBlockModel(BlockModelTorch::new)
+		.setBlockModel((b) -> {
+			TextureRegistry.getTexture(MOD_ID + ":item/particle_magicsmoke");
+			TextureRegistry.getTexture(MOD_ID + ":item/particle_star");
+			return new BlockModelTorch<>(b);
+		})
 		.setLuminance(15)
 		.build(new BlockTorchStar("torch.star", blockId++))
 		.withDisabledNeighborNotifyOnMetadataChange();
@@ -347,7 +352,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 					"MSM",
 					"MMM")
 				.addInput('M', ingotMoonSteel)
-				.addInput('S', ModItems.GoldBackpack)
+				.addInput('S', ModItems.goldBackpack)
 				.create("cosmic_backpack", cosmicBackpack.getDefaultStack());
 		}
 
