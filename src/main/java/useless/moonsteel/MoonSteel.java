@@ -204,7 +204,7 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	public void beforeGameStart() {
 		EntityHelper.createTileEntity(TileEntityStellarRewinder.class, "moonsteel$stellar_rewinder");
 		if (backpackPresent){
-			CreativeHelper.setParent(cosmicBackpack.getDefaultStack(), ModItems.DiamondBackpack.getDefaultStack());
+			CreativeHelper.setParent(cosmicBackpack.getDefaultStack(), ModItems.diamondBackpack.getDefaultStack());
 		}
 	}
 
