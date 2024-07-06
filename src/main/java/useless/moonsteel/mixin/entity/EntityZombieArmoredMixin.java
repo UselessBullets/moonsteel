@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import useless.moonsteel.MoonSteel;
 import useless.moonsteel.interfaces.IMoonGrav;
@@ -29,8 +30,8 @@ public abstract class EntityZombieArmoredMixin extends EntityZombie implements I
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
-	@Override
-	public void init(){
+	@Inject(method = "init", at = @At("TAIL"))
+	public void init(CallbackInfo ci){
 		entityData.define(20, (byte)0);
 	}
 	@Override

@@ -331,6 +331,11 @@ public class MoonSteel implements ModInitializer, GameStartEntrypoint, RecipeEnt
 	}
 
 	@Override
+	public void initNamespaces() {
+		RecipeBuilder.initNameSpace(MOD_ID);
+	}
+
+	@Override
 	public void beforeClientStart() {
 		SoundHelper.Client.addSound(MOD_ID, "starspawn.wav");
 	}
