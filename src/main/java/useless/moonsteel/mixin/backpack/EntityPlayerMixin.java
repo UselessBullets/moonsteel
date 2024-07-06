@@ -36,4 +36,9 @@ public class EntityPlayerMixin implements IStarBackpack {
 	public void moonsteel$displayGuiStarBackpack() {
 
 	}
+
+	@Override
+	public void moonsteel$setStarBackpackInventory(StarBackpackInventory backpackInventory) {
+		starBackpackInventory = backpackInventory;
+	}
 }
