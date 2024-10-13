@@ -20,7 +20,7 @@
   "client": [
     "backpack.EntityPlayerSPMixin",
     "NetClientHandlerMixin",
-    "MinecraftMixin"
+    "backpack.MinecraftMixin"
   ],
   "server": [
     "ChunkProviderServerMixin",
